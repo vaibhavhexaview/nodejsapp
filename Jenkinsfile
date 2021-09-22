@@ -3,7 +3,7 @@ node
  
   stage("CheckOutCodeGit")
   {
-   git branch: 'main', url: 'https://github.com/vaibhavhexaview/nodeproj.git'
+   git branch: 'master', url: 'https://github.com/vaibhavhexaview/nodejsapp.git'
  }
  
  stage("Build")
@@ -16,14 +16,14 @@ node
 /*
  
  stage('ExecuteSonarQubeReport') {
-     nodejs(nodeJSInstallationName: 'nodejs15.2.1') {
+     nodejs(nodeJSInstallationName: 'nodejs') {
         sh 'npm run sonar'
     }
       
         } 
 		
     stage('UploadintoNexus') {
-       nodejs(nodeJSInstallationName: 'nodejs15.2.1') {
+       nodejs(nodeJSInstallationName: 'nodejs') {
           sh 'npm publish'
       }
       
@@ -33,11 +33,16 @@ node
  
  stage('RunNodeJsApp')
  {
- //sh "./scripts/run.sh"
+    sh "chmod u+x ./scripts/runApp.sh"
+    sh "./scripts/runApp.sh"
+
+/*
 
  nodejs(nodeJSInstallationName: 'nodejs') {
         sh 'npm start &'
     }
+*/
+
 
 }    
     
