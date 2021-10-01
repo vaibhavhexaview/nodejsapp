@@ -1,10 +1,10 @@
 {
-  "name": "nodejsexamples",
+  "name": "nodejsapp",
   "version": "1.0.0",
   "description": "This Project explains all Node JS examples",
   "main": "app.js",
   "publishConfig": {
-    "registry": "http://13.233.36.149:8081/repository/nodejs-repo/"
+    "registry": "http://sonarTypeIP:port/repository/nodejsrepo/"
   },
   "scripts": {
     "server": "http-server -c-1 -p 9999",
@@ -15,7 +15,8 @@
   },
   "dependencies": {
     "cfenv": "^1.2.4",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "pm2": "^5.1.2"
   },
   "devDependencies": {
     "nodemon": "^1.18.9",
