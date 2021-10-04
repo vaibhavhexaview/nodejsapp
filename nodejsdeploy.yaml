@@ -1,18 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nodejsapp-deployment
+  name: nodejsapp-deployment
+
 spec:
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: nodejs  
-    spec:
-      containers: 
-      - name: nodejsapp
-        image: vaibhavhexaview/nodejs-app:v1.1
-        ports:
-        - containerPort: 9981
+  replicas: 1
+  selector:
+    matchLabels:
+      env: production
 
+  template:
+    metadata:
+      name: nodejsapp
+      labels:
+       env: production
 
+    spec:
+      containers:
+      - name: nodejsapp
+        image: vaibhavhexaview/nodejs-app:v1.1
