@@ -24,12 +24,10 @@ node
  
  stage("Docker Build")
   {
-	steps {
                 sh '''
                 docker build -t nodejsapp:v2.0 .
                 docker images
                 '''
-            }
 	}
 
 /*
