@@ -1,5 +1,0 @@
-lsof -i tcp:<PORT>
-
-
-kill -9 <process-id>
-
