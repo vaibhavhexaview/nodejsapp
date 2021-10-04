@@ -48,16 +48,12 @@ node
   stage("Create Deployment")
    {
 
-        sh 'kubectl create -f nodejsdeploy.yaml' 
-   }
-
-
-  stage("Expose NodeJs to Internet")
-   {
-
-	sh 'kubectl expose deployment nodejsdeploy --type="LoadBalancer"'
-	sh 'kubectl get svc'
-
+        sh '''
+	 kubectl create -f nodejsdeploy.yaml' 
+	 kubectl expose deployment.apps/nodejsapp-deployment --port=6000 --type=LoadBalancer
+         sleep 20
+	 kubectl get svc
+	'''
    }
 
    
