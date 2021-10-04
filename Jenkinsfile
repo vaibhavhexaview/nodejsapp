@@ -4,46 +4,61 @@ node
   stage("CheckOutCodeGit")
   {
    git branch: 'master', url: 'https://github.com/vaibhavhexaview/nodejsapp.git'
- }
+  }
+
  
  stage("Build")
- {
- nodejs(nodeJSInstallationName: 'nodejs') {
+  {
+     nodejs(nodeJSInstallationName: 'nodejs') {
         sh 'npm install'
-    }
- }  
+       }
+  }  
+
  
-/*
- 
- stage('ExecuteSonarQubeReport') {
+ stage('ExecuteSonarQubeReport') 
+  {
      nodejs(nodeJSInstallationName: 'nodejs') {
         sh 'npm run sonar'
-    }
-      
-        } 
-		
-    stage('UploadintoNexus') {
-       nodejs(nodeJSInstallationName: 'nodejs') {
-          sh 'npm publish'
-      }
-      
-          }	
-
-*/
+       }
+  }
  
- stage('RunNodeJsApp')
- {
-    sh "chmod u+x ./scripts/runApp.sh"
-    sh "./scripts/runApp.sh"
+ stage("Docker Build")
+  {
+	steps {
+                sh '''
+                docker build -t nodejsapp:v2.0 .
+                docker images
+                '''
+            }
+	}
 
 /*
 
- nodejs(nodeJSInstallationName: 'nodejs') {
-        sh 'npm start &'
-    }
+ stage("Docker Push"){
+
+        sh '''
+	docker tag nodejsapp vaibhavhexaview/nodejs-app'
+	docker push vaibhavhexaview/nodejs-app:v2.0
+	''' 
+ }
+
+
+
+  stage("Create Deployment")
+   {
+
+        sh 'kubectl create -f nodejsdeploy.yaml' 
+   }
+
+
+  stage("Expose NodeJs to Internet")
+   {
+
+	sh 'kubectl expose deployment nodejsdeploy --type="LoadBalancer"'
+
+   }
+
 */
-
-
-}    
     
 }
+
