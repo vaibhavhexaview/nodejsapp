@@ -55,6 +55,7 @@ node
    {
 
 	sh 'kubectl expose deployment nodejsdeploy --type="LoadBalancer"'
+	sh 'kubectl get svc'
 
    }
 
