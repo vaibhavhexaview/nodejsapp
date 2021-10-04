@@ -47,11 +47,11 @@ node
    {
 
         sh '''
-	 kubectl create -f nodejsdeploy.yaml' 
+	 kubectl create -f nodejsdeploy.yaml 
 	 kubectl expose deployment.apps/nodejsapp-deployment --port=6000 --type=LoadBalancer
          sleep 20
 	 kubectl get svc
-	'''
+	 '''
    }
 
    
